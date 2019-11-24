@@ -19,7 +19,7 @@ fn main() {
             .route("/burden/put", web::get().to(burden::put_a_burden))
             .route("/burden/reduce", web::get().to(burden::reduce_the_burden))
     })
-        .bind("localhost:8080")
+        .bind("0.0.0.0:8080")
         .unwrap()
         .run()
         .unwrap();

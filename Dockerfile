@@ -1,6 +1,6 @@
 FROM rust:alpine3.10 as builder
-ARG PROJECT_NAME
 
+ARG PROJECT_NAME=util_container
 WORKDIR /workspace/${PROJECT_NAME}
 
 # https://github.com/rust-lang/cargo/issues/7563
@@ -26,9 +26,13 @@ RUN cargo build --release
 # FROM gcr.io/distroless/static:latest
 FROM alpine:3.10
 
+ARG PROJECT_NAME=util_container
+
+RUN apk add --no-cache g++
+
 USER nobody
 WORKDIR /workspace
 
-COPY --from=builder /workspace/${PROJECT_NAME}/target/release/${PROJECT_NAME} /workspace/${PROJECT_NAME}
+COPY --from=builder /workspace/${PROJECT_NAME}/target/release/${PROJECT_NAME} /workspace/app
 
 CMD ["/workspace/app"]
