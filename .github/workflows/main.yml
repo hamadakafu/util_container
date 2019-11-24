@@ -18,5 +18,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: docker build, push
         run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/util_container || true
           docker build . -t ${{ secrets.DOCKER_USERNAME }}/util_container:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/util_container:${{ github.sha }}
