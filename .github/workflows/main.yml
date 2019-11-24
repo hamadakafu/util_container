@@ -17,4 +17,5 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/util_container || true
           docker build . -t ${{ secrets.DOCKER_USERNAME }}/util_container
           docker tag ${{ secrets.DOCKER_USERNAME }}/util_container:latest ${{ secrets.DOCKER_USERNAME }}/util_container:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/util_container:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/util_container:${{ github.sha }}
